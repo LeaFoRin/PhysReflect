@@ -1,6 +1,10 @@
 # PhysReflect: Geometry and Perception Guided Diffusion for Physically-Plausible Mirror Reflections
 
 > Official repository for **PhysReflect: Geometry and Perception Guided Diffusion for Physically-Plausible Mirror Reflections**.
+>
+##Latest status: 
+**The paper has been accepted by SIGGRAPH Asia 2026.**
+>
 
 ## Release Status
 
@@ -74,12 +78,11 @@ If you find this project useful, please cite the PhysReflect paper. The complete
 Please also cite MirrorVerse when using its baseline or SynMirrorV2 dataset:
 
 ```bibtex
-@inproceedings{dhiman2025mirrorverse,
-  title     = {MirrorVerse: Pushing Diffusion Models to Realistically Reflect the World},
-  author    = {Dhiman, Ankit and Shah, Manan and Babu, R. Venkatesh},
-  booktitle = {Proceedings of the Computer Vision and Pattern Recognition Conference},
-  pages     = {11239--11249},
-  year      = {2025}
+@inproceedings{Ge2026PhysReflectGA,
+  title={PhysReflect: Geometry and Perception Guided Diffusion for Physically-Plausible Mirror Reflections},
+  author={Shu-Heng Ge and Hongwei Ren and Li Zhang and Xiang-Qian Wu},
+  year={2026},
+  url={https://api.semanticscholar.org/CorpusID:292220083}
 }
 ```
 
