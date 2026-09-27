@@ -3,7 +3,7 @@
 > Official repository for **PhysReflect: Geometry and Perception Guided Diffusion for Physically-Plausible Mirror Reflections**.
 >
 ##Latest status: 
-**The paper has been accepted by SIGGRAPH Asia 2026.**
+**The paper has been accepted by SIGGRAPH Asia 2026.**  Code & Checkpoint is Coming Soon.
 >
 
 ## Release Status
