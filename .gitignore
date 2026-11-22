@@ -52,6 +52,5 @@ Thumbs.db
 *.pem
 *.key
 
-# Keep lightweight model documentation and architecture configurations
-!models/**/README.md
-!models/**/config.json
+# Model configurations are provided in the downloaded checkpoint archives.
+models/**/*.json
