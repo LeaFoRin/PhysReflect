@@ -1,0 +1,23 @@
+# Inference dependencies for Python 3.11.
+# Install the matching CUDA build of torch/torchvision for your machine first.
+# The bundled src/diffusers is loaded directly: do not install a PyPI diffusers
+# wheel to replace it. Supply prepared depth maps alongside input images.
+torch==2.3.0
+torchvision==0.18.0
+numpy==1.26.4
+transformers==4.57.1
+accelerate==1.13.0
+huggingface-hub==0.36.0
+safetensors==0.8.0
+pandas==2.2.0
+Pillow==12.3.0
+h5py==3.15.1
+matplotlib==3.10.8
+scipy==1.17.1
+tqdm==4.67.3
+packaging==26.0
+importlib-metadata==8.7.0
+filelock==3.25.2
+regex==2026.2.28
+requests==2.32.5
+ftfy==6.3.1

@@ -1,0 +1,57 @@
+# Model weights and binary checkpoints
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.pkl
+
+# Downloaded archives and partial downloads
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.part
+*.tmp
+
+# Local datasets and generated results
+data/
+datasets/
+outputs/
+output/
+results/
+inference/
+
+# Logs and experiment artifacts
+logs/
+*.log
+runs/
+wandb/
+
+# Python, editor, and operating-system caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local secrets and environment overrides
+.env
+.env.*
+*.pem
+*.key
+
+# Keep lightweight model documentation and architecture configurations
+!models/**/README.md
+!models/**/config.json
