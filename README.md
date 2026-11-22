@@ -4,14 +4,20 @@
 
 **The paper has been accepted by SIGGRAPH Asia 2026.**
 
+**[Paper — ACM Digital Library](https://dl.acm.org/doi/10.1145/3829340.3842250)**
+
 ## Release Status
 
-Inference code, dependency setup, and three pretrained PhysReflect checkpoints are available.
+**Last updated: 2026-11-22.** Inference code, dependency setup, and three pretrained PhysReflect checkpoints are available.
 
+**[Download pretrained checkpoints (Google Drive)](https://drive.google.com/drive/folders/1ombIge3e_bAvOn24rcQLhxfCzZ44wFpG?usp=sharing)** — single-object, multi-object, and MSD models.
+
+- [Datasets: SynMirrorV2 and MSD](#datasets)
 - [Environment setup](#getting-started)
-- [Pretrained checkpoints](#pretrained-checkpoints)
+- [Checkpoint downloads and verification](#pretrained-checkpoints)
 - [Inference instructions](#inference)
 - [Input format](#input-format)
+- [Release plan](#release-plan)
 
 ## Overview
 
@@ -27,9 +33,11 @@ PhysReflect is designed around two complementary sources of guidance:
 - **Perceptual guidance** promotes visually coherent reflections while preserving important semantic and appearance cues.
 - **Diffusion-based generation** integrates these constraints within a flexible image-generation framework.
 
-Further architectural details, objectives, and implementation notes will be added when the paper and code are released.
+The current release provides inference code and pretrained checkpoints. Additional method details and resources will be added as they become available.
 
-## Dataset
+## Datasets
+
+### SynMirrorV2
 
 We adopt **SynMirrorV2**, introduced in MirrorVerse, as the primary synthetic training and evaluation resource. SynMirrorV2 contains **207K samples** and provides full scene geometry, including:
 
@@ -42,6 +50,12 @@ The dataset includes varied object poses, occlusions, camera viewpoints, and mul
 
 > PhysReflect does not redistribute SynMirrorV2. Please obtain the dataset from its official source and comply with the original license and usage terms.
 
+### MSD (Mirror Segmentation Dataset)
+
+**MSD**, introduced in *Where Is My Mirror?* (ICCV 2019), contains **4,018 real-world RGB images** with manually annotated **pixel-level mirror masks**, covering both indoor and outdoor scenes. We use MSD to evaluate mirror-reflection generation on real-world photographs. The paper and dataset access instructions are available on the authors' [official MSD project page](https://mhaiyang.github.io/ICCV2019_MirrorNet/index.html).
+
+For `--model msd`, prepare paired RGB images, mirror masks, and depth maps as described in [Input Format](#input-format). Depth maps must be prepared separately.
+
 ## Baselines
 
 Our experiments follow the baseline setting provided by MirrorVerse, including its released checkpoints:
@@ -51,13 +65,13 @@ Our experiments follow the baseline setting provided by MirrorVerse, including i
 | **MirrorFusion-v2** | Trained on the single- and multi-object samples of SynMirrorV2. |
 | **MirrorFusion-v2-MSD** | Fine-tuned on the real-world Mirror Segmentation Dataset (MSD). |
 
-Baseline code, checkpoints, and usage instructions are maintained by the [MirrorVerse authors](https://github.com/val-iisc/MirrorVerse). Any project-specific preprocessing or evaluation changes will be documented in this repository upon release.
+Baseline code, checkpoints, and usage instructions are maintained by the [MirrorVerse authors](https://github.com/val-iisc/MirrorVerse). PhysReflect input preparation and inference usage are documented below; evaluation scripts remain on the release plan.
 
-## Release Checklist
+## Release Plan
 
-- [x] Inference code
-- [x] Pretrained PhysReflect checkpoints
-- [x] Inference environment and dependency instructions
+- ✅ **2026-11-22** — [Inference code](inference-code/)
+- ✅ **2026-11-22** — [Pretrained PhysReflect checkpoints: single-object, multi-object, and MSD](#pretrained-checkpoints)
+- ✅ **2026-11-22** — [Inference environment and dependency instructions](#getting-started)
 - [ ] Training and fine-tuning pipeline
 - [ ] Dataset preparation tools
 - [ ] Evaluation scripts and benchmark configuration
@@ -81,7 +95,7 @@ The entry point uses the bundled modified Diffusers source in `inference-code/sr
 
 ## Pretrained Checkpoints
 
-Download from the [PhysReflect checkpoint folder on Google Drive](https://drive.google.com/drive/folders/1ombIge3e_bAvOn24rcQLhxfCzZ44wFpG?usp=sharing). The `model` subfolder contains the following archives:
+Download from the [PhysReflect checkpoint folder on Google Drive](https://drive.google.com/drive/folders/1ombIge3e_bAvOn24rcQLhxfCzZ44wFpG?usp=sharing), open its [model subfolder](https://drive.google.com/drive/folders/1zFNpFAirkYPW3RBI3TBVlZacHEQdGtXP), or use the individual links below:
 
 | Model | Download | Extracted directory | Archive size |
 |---|---|---|---|
@@ -89,7 +103,7 @@ Download from the [PhysReflect checkpoint folder on Google Drive](https://drive.
 | Multi-object (`--model multi`) | [PhysReflect-multi-object-fp32.zip](https://drive.google.com/file/d/1IxghAI1k1D0VTwcfBuXdK5olEHWeh1nb/view) | `models/multi-object` | 5.91 GB |
 | MSD (`--model msd`) | [PhysReflect-msd-fp32.zip](https://drive.google.com/file/d/1rFw8WGrwR0jbFGEw5tPL_L2SPHRyNQMs/view) | `models/msd` | 5.91 GB |
 
-Each archive contains a paired BrushNet and UNet, their architecture configurations, a README, and file checksums. The stored weights are FP32; the launcher loads them in FP16 by default. Model archives are hosted on Drive, with their expected SHA-256 digests in [CHECKPOINTS_SHA256SUMS](CHECKPOINTS_SHA256SUMS).
+Each archive contains a paired BrushNet and UNet, their architecture configurations, a README, and file checksums. Extract the archive with its directory structure intact to restore both weights and `config.json` files; model configurations are supplied by the downloads. The stored weights are FP32; the launcher loads them in FP16 by default. Model archives are hosted on Drive, with their expected SHA-256 digests in [CHECKPOINTS_SHA256SUMS](CHECKPOINTS_SHA256SUMS).
 
 If all three archives are downloaded into this repository directory, verify them and extract them with:
 
@@ -144,14 +158,19 @@ Quantitative comparisons, qualitative results, and ablation studies will be adde
 
 ## Citation
 
-If you find this project useful, please cite the PhysReflect paper:
+If you use PhysReflect in your research, please cite the [ACM conference paper](https://dl.acm.org/doi/10.1145/3829340.3842250) using the following BibTeX entry. Author names, venue, and pages follow the DOI publication metadata.
 
 ```bibtex
-@inproceedings{Ge2026PhysReflectGA,
-  title={PhysReflect: Geometry and Perception Guided Diffusion for Physically-Plausible Mirror Reflections},
-  author={Shu-Heng Ge and Hongwei Ren and Li Zhang and Xiang-Qian Wu},
-  year={2026},
-  url={https://api.semanticscholar.org/CorpusID:292220083}
+@inproceedings{ge2026physreflect,
+  author    = {Ge, Shuheng and Ren, Hongwei and Zhang, Li and Wu, Xiangqian},
+  title     = {{PhysReflect}: Geometry and Perception Guided Diffusion for Physically-Plausible Mirror Reflections},
+  booktitle = {Proceedings of the SIGGRAPH Asia 2026 Conference Papers},
+  series    = {SA Conference Papers '26},
+  year      = {2026},
+  pages     = {1--11},
+  publisher = {ACM},
+  doi       = {10.1145/3829340.3842250},
+  url       = {https://doi.org/10.1145/3829340.3842250}
 }
 ```
 
